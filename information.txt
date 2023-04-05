@@ -1,6 +1,10 @@
 
 <button routerLink="/user/{{data.id}}" class="btn btn-primary">E</button>
 
+then in routing file :-
+
+    {path:"user/:id",component:EdituserComponent}
+
 then in next file's constructor use dependancy injection of :-
 
     route:ActivatedRoute
@@ -39,4 +43,4 @@ then in submit function
       })
     }
   }
-  
+
