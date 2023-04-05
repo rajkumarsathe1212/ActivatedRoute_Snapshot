@@ -1,0 +1,42 @@
+
+<button routerLink="/user/{{data.id}}" class="btn btn-primary">E</button>
+
+then in next file's constructor use dependancy injection of :-
+
+    route:ActivatedRoute
+
+then in constructor get that id in a variable :-
+
+    this.id = this.route.snapshot.paraMap.get("id");
+
+    then in ngOnInit(){
+
+      if(this.id != null){
+        this.api.get("usersCrud/" + this.id).subscribe((result:any)=>{
+
+          console.log(result);
+
+            this.formdata.patchValue({
+              name:result.name
+            })
+          })
+      }
+    }
+
+then in submit function
+
+
+  submit(data:any){
+    if(this.id == null){
+      this.api.post("usersCrud",data).subscribe((result:any)=>{
+        this.router.navigate(['/']);
+        this.ngOnInit();
+      })
+    }
+    else{
+      this.api.put("usersCrud/" + this.id,data).subscribe((result:any)=>{
+        this.router.navigate(['/']);
+      })
+    }
+  }
+  
